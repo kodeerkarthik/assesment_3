@@ -95,7 +95,7 @@ a {	font-size: 20px;}
 .fa-wifi{ color: #00c900; font-size: 30px; }
 .fa-th-large { font-size: 20px; }
 .evnt{ width: 100px; }
-.white { background-color: #f2f6f7; margin-bottom: 20px; height: 130px; }
+.white { background-color: #f2f6f7; margin-bottom: 20px; }
 .evnt_body {
 	background-color: #bababa;
 	width: 95%;
@@ -111,47 +111,55 @@ a {	font-size: 20px;}
 
 .cal {
 	margin-top: 20px;
-	padding:0 40px;
+	text-align: left;
+	font-size: 18px;
 }
 .monthPre{
-color: gray;
-text-align: center;
+	color: gray;
+	text-align: center;
 }
 .monthNow{
-text-align: center;
+	text-align: center;
 }
 .dayNow{
-color: white;
-text-align: center;
-background-color: #05c4b4;
+	color: white;
+	text-align: center;
+	background-color: #05c4b4;
 }
 #calendar{
-background-color: #eaedf2;
-width: 75%;
+	background-color: #eaedf2;
+	border: 1px solid #b1b5bb;
+	width: 100%;
+	height: 280px;
 }
 .calendar td{ 
-htmlContent: 2px;
-width: 40px;
+	htmlContent: 2px;
+	width: 100px;
+	height: 30px;
 }
 .button{
-width: 200px;
-border-radius: 25px;
-margin-left: 50px;
+	width: 150px;
+	font-size: 15px;
+	border-radius: 25px;
 }
 .monthNow th{
-/*background-color: #e8e8e8;*/
-text-align: center;
+	text-align: center;
+	height: 45px;
 }
 .dayNames{
-background:#bababa;
-color: #FFFFFF;
-text-align: center;
+	background:#bababa;
+	font-weight: bold;
+	text-align: center;
+	height: 35px;
 }
 .optn {
-	background-color: #42f4c5;
-	font-size: 12px;
-	border: white solid 2px;
+	background-color: #7cd1e4;
+	font-size: 15px;
+	font-weight: bold;
+	border: black solid 1px;
 	border-radius: 50px;
-	width: 100px;
 	height: 25px;
+	margin-top: 10px;
 }
+.right { text-align: right; }
+.fas { margin: 0 8px; }

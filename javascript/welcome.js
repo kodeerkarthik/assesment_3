@@ -15,62 +15,44 @@ function signup()
 {
 	document.getElementById("signup").style.display = "block";
 	document.getElementById("main").style.display = "none";
-}
-function signup_complete(){
-	
+	document.getElementById("loginModal").style.display = "none";
 }
 function check_Email(mail){
     var regex = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{1,5}){2,25})$/;
-    if(regex.test(mail.myemail.value)){
-      // return true;
+    var regpwd = /^([A-Za-z0-9_\-\.\@]){8}$/;
+    if(regex.test(mail.myemail.value)==true && regpwd.test(mail.mypwd.value)==true){
+    	window.location = "manager.html";
+    	alert ("Login successfully");
+    	return false;
     }
-    else{
-      alert("This is not a valid email address");
-      // return false;
+    else if ( regex.test(mail.myemail.value)==true && regpwd.test(mail.mypwd.value)==false ){
+    	document.getElementById("signinpwd").innerHTML="This is not a valid email address";
+    	return false;
     }
-    var regpwd = /^(?=.*\d).{4,8}$/;
-    if(regpwd.test(mail.mypwd.value)){
-      location.href = "http://google.com";
+    else if ( regex.test(mail.myemail.value)==false && regpwd.test(mail.mypwd.value)==true ){
+    	document.getElementById("signinemail").innerHTML="This is not a valid password";
+    	return false;
     }
-    else{
-      alert("This is not a valid password");
-      // return false;
+    else {
+    	document.getElementById("signinemail").innerHTML="This is not a valid email address";
+    	document.getElementById("signinpwd").innerHTML="This is not a valid password";
+    	return false;
     }
+	return false;
 }
-function check_form(elmt){
-	var regfname = /^[a-zA-Z ]{2,30}$/;
-		if(regfname.test(elmt.fname.value)){}
-		else alert("Please Enter valid first_name");
-	var reglname = /^[a-zA-Z ]{2,30}$/;
-		if(reglname.test(elmt.lname.value)){}
-		else alert("Please Enter valid last_name");
+function check_form(){
+	var regfname = /^[a-zA-Z ]{2,30}$/;		
+	var reglname = /^[a-zA-Z ]{2,30}$/;	
 	var regemail =/^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{1,5}){2,25})$/;
-		if(regemail.test(elmt.email.value)){}
-		else alert("Please Enter valid emali");
-	var regph_no = /^[0-9]{3}-)[0-9]{3}-[0-9]{4}/;
-		if(regph_no.test(elmt.ph_no.value)){}
-		else alert("Please Enter valid phone number");
+	var regph_no = /^[0-9]{3}-[0-9]{3}-[0-9]{4}/;	
 	var regadr1 = /^[a-zA-Z0-9\s\,\''\-]*$/;
-		if(regadr1.test(elmt.adr1.value)){}
-		else alert("Please Enter valid address1");
 	var regadr2 = /^[a-zA-Z0-9\s\,\''\-]*$/;
-		if(regadr2.test(elmt.adr2.value)){}
-		else alert("Please Enter valid address2");
 	var regcity =  /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
-		if(regcity.test(elmt.city.value)){}
-		else alert("Please Enter valid city name");
 	var regstate =  /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
-		if(regstate.test(elmt.state.value)){}
-		else alert("Please Enter valid state name");
 	var regzip = /^\d{5}$|^\d{5}-\d{4}$/;
-		if(regzip.test(elmt.zip.value)){}
-		else alert("Please Enter valid zip code");
 	var regpwd =  /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-		if(regpwd.test(elmt.pwd.value)){}
-		else alert("Please Enter valid password");
 	var regv_pwd =  /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-		if(regv_pwd.test(elmt.v_pwd.value) && pwd==v_pwd){}
-		else alert("password missmatch");
+
 	var fname=document.myform.fname.value;
 	var lname=document.myform.lname.value;
 	var email=document.myform.email.value;
@@ -88,8 +70,19 @@ function check_form(elmt){
 		document.getElementById("fname").style.color="#ff0000b5";
 		document.getElementById("ifname").style.border="1px solid #ff0000b5";
 	}
+	else if(regfname.test(fname)== false){
+		document.getElementById("pfname").innerHTML="Please Enter Valid first name";
+		document.getElementById("fname").style.color="#ff0000b5";
+		document.getElementById("ifname").style.border="1px solid #ff0000b5";
+	}
+
 	if(lname=='null' || lname=="") {
 		document.getElementById("plname").innerHTML="lastname can't be blank";
+		document.getElementById("lname").style.color="#ff0000b5";
+		document.getElementById("ilname").style.border="1px solid #ff0000b5";
+	}
+	else if(reglname.test(lname)==false){
+		document.getElementById("plname").innerHTML="Please Enter Valid last name";
 		document.getElementById("lname").style.color="#ff0000b5";
 		document.getElementById("ilname").style.border="1px solid #ff0000b5";
 	}
@@ -97,45 +90,103 @@ function check_form(elmt){
 		document.getElementById("pemail").innerHTML="email can't be blank";
 		document.getElementById("email").style.color="#ff0000b5";
 		document.getElementById("iemail").style.border="1px solid #ff0000b5";
-	}			
+	}	
+	else if(regemail.test(email)==false){
+		document.getElementById("pemail").innerHTML="Please Enter Valid email";
+		document.getElementById("email").style.color="#ff0000b5";
+		document.getElementById("iemail").style.border="1px solid #ff0000b5";
+	}
+
 	if(ph=='null' || ph=="") {
 		document.getElementById("pph_no").innerHTML="phone number can't be blank";	
 		document.getElementById("ph").style.color="#ff0000b5";
 		document.getElementById("iph").style.border="1px solid #ff0000b5";
-	}		
+	}	
+	else if(regph_no.test(ph)==false){
+		document.getElementById("pph_no").innerHTML="Please Enter valid phone number";	
+		document.getElementById("ph").style.color="#ff0000b5";
+		document.getElementById("iph").style.border="1px solid #ff0000b5";
+	}
+
 	if(adr1=='null' || adr1==""){
 		document.getElementById("padr1").innerHTML="address1 can't be blank";
 		document.getElementById("adr1").style.color="#ff0000b5	";
 		document.getElementById("iadr1").style.border="1px solid #ff0000b5";
 	}
+	else if(regadr1.test(adr1)==false){
+	document.getElementById("padr1").innerHTML="please Enter valid address1";
+	document.getElementById("adr1").style.color="#ff0000b5	";
+	document.getElementById("iadr1").style.border="1px solid #ff0000b5";
+	}
+
 	if(adr2=='null' || adr2==""){
 		document.getElementById("padr2").innerHTML="address2 can't be blank";
 		document.getElementById("adr2").style.color="#ff0000b5	";
 		document.getElementById("iadr2").style.border="1px solid #ff0000b5";
 	}
+	else if(regadr2.test(adr2)==false){
+		document.getElementById("padr2").innerHTML="Please ebter vali address2";
+		document.getElementById("adr2").style.color="#ff0000b5	";
+		document.getElementById("iadr2").style.border="1px solid #ff0000b5";
+	}
+
 	if(city=='null' || city==""){
 		document.getElementById("pcity").innerHTML="city can't be blank";
 		document.getElementById("city").style.color="#ff0000b5	";
 		document.getElementById("icity").style.border="1px solid #ff0000b5";
 	}
+	else if(regcity.test(city)==false){
+		document.getElementById("pcity").innerHTML="please enter valid city name";
+		document.getElementById("city").style.color="#ff0000b5	";
+		document.getElementById("icity").style.border="1px solid #ff0000b5";
+	}
+
 	if(state=='null' || state==""){
 		document.getElementById("pstate").innerHTML="state can't be blank";	
 		document.getElementById("state").style.color="#ff0000b5	";
 		document.getElementById("istate").style.border="1px solid #ff0000b5";
 	}
+	else if(regstate.test(state)==false){
+		document.getElementById("pstate").innerHTML="please enter valid state name";	
+		document.getElementById("state").style.color="#ff0000b5	";
+		document.getElementById("istate").style.border="1px solid #ff0000b5";
+	}
+
 	if(zip=='null' || zip==""){
 		document.getElementById("pzip").innerHTML="zip can't be blank";	
 		document.getElementById("zip").style.color="#ff0000b5	";
 		document.getElementById("izip").style.border="1px solid #ff0000b5";	
 	}
+	else if(regzip.test(zip)==false){
+		document.getElementById("pzip").innerHTML="please Enter valid zip code";	
+		document.getElementById("zip").style.color="#ff0000b5	";
+		document.getElementById("izip").style.border="1px solid #ff0000b5";	
+	}
 	if(pwd=='null' || pwd==""){
-		document.getElementById("ppwd").innerHTML="zip can't be blank";	
+		document.getElementById("ppwd").innerHTML="password can't be blank";	
 		document.getElementById("pwd").style.color="#ff0000b5	";
 		document.getElementById("ipwd").style.border="1px solid #ff0000b5";	
 	}
+	else if(regpwd.test(pwd)==false){
+		document.getElementById("ppwd").innerHTML="please enter valid password";	
+		document.getElementById("pwd").style.color="#ff0000b5	";
+		document.getElementById("ipwd").style.border="1px solid #ff0000b5";	
+	}
+
 	if(v_pwd=='null' || v_pwd==""){
-		document.getElementById("pv_pwd").innerHTML="zip can't be blank";	
+		document.getElementById("pv_pwd").innerHTML="Re enter the password";	
 		document.getElementById("v_pwd").style.color="#ff0000b5	";
 		document.getElementById("iv_pwd").style.border="1px solid #ff0000b5";	
 	}
+	else if(regv_pwd.test(v_pwd) && pwd==v_pwd){ 
+		alert("Signup successfully");
+		document.location.reload();
+		
+	}
+	else {
+		document.getElementById("pv_pwd").innerHTML="Missmatch password";	
+		document.getElementById("v_pwd").style.color="#ff0000b5	";
+		document.getElementById("iv_pwd").style.border="1px solid #ff0000b5";
+	}
+	return false;
 }

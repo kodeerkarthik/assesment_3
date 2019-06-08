@@ -1,5 +1,6 @@
    var t= new Date();
-   document.getElementById("date").innerHTML=t;
+   var str = t.toGMTString();
+   document.getElementById("date").innerHTML=str;
    var time=t.getHours();
   // document.write(time);
   if(time<12)
@@ -78,12 +79,15 @@ document.getElementById("delete").style.display="none";
 document.getElementById("delete1").style.display="none";
 document.getElementById("delete2").style.display="none";
 function option(){
+  document.getElementById("time").style.display="none";
   document.getElementById("delete").style.display="block";
 }
 function option1(){
+  document.getElementById("time1").style.display="none";
   document.getElementById("delete1").style.display="block";
 }
 function option2(){
+  document.getElementById("time2").style.display="none";
   document.getElementById("delete2").style.display="block";
 }
 function remv(){
